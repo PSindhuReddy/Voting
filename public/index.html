@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoteSafe - Online Voting Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span class="logo-icon">🗳️</span>
+                    VoteSafe
+                </div>
+                <div class="nav-links">
+                    <a href="#" id="homeLink">Home</a>
+                    <a href="#" id="loginBtn">Login</a>
+                    <button class="logout-btn" id="logoutBtn" style="display: none;">Logout</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Landing Page -->
+            <section class="hero" id="landingPage">
+                <div class="hero-content">
+                    <h1>Welcome to VoteSafe</h1>
+                    <p class="subtitle">A secure, transparent, and accessible online voting platform designed to make your voice heard. Vote from anywhere with confidence.</p>
+                    
+                    <div class="features">
+                        <div class="feature">
+                            <div class="feature-icon">🔒</div>
+                            <h3>Secure</h3>
+                            <p>Advanced encryption protocols ensure your vote remains confidential and tamper-proof.</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Fast</h3>
+                            <p>Quick registration and seamless voting process with real-time results.</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">📱</div>
+                            <h3>Accessible</h3>
+                            <p>Vote from any device, anywhere, anytime, with full accessibility features.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary" id="registerBtn">Register Now</a>
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8434614/" target="_blank" class="btn btn-secondary" id="learnMoreBtn">Learn More About Blockchain</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="voting_image.png" alt="Digital online voting system showing a person using a laptop to cast a ballot electronically">
+                </div>
+            </section>
+
+            <!-- User Dashboard (Voting Application) -->
+            <section class="dashboard" id="dashboard">
+                <div class="dashboard-header">
+                    <h2 class="dashboard-title">Voting Dashboard</h2>
+                    <div class="user-welcome" id="userWelcome">Welcome back, User!</div>
+                </div>
+                
+                <div class="dashboard-content" id="userVotingCards">
+                    <!-- Voting cards will be dynamically generated here -->
+                </div>
+            </section>
+
+            <!-- Admin Dashboard -->
+            <section class="admin-dashboard" id="adminDashboard">
+                <div class="dashboard-header">
+                    <h2 class="dashboard-title">Admin Dashboard</h2>
+                    <div class="user-welcome">Administrator Panel</div>
+                </div>
+                
+                <div class="dashboard-content">
+                    <div class="admin-tabs">
+                        <div class="admin-tab active" data-tab="manageElections">Manage Elections</div>
+                        <div class="admin-tab" data-tab="results">View Results</div>
+                        <div class="admin-tab" data-tab="users">Manage Users</div>
+                    </div>
+                    
+                    <div class="admin-content">
+                        <!-- Manage Elections Tab -->
+                        <div class="tab-panel active" id="manageElections">
+                            <div class="admin-actions">
+                                <h3>Current Elections</h3>
+                                <button class="btn btn-primary" id="createElectionBtn">Create New Election</button>
+                            </div>
+                            
+                            <table class="election-list" id="electionTable">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Type</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Elections will be listed here dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Results Tab -->
+                        <div class="tab-panel" id="results">
+                            <div class="admin-actions">
+                                <h3>Election Results</h3>
+                                <select id="resultElectionSelect">
+                                    <option value="">Select an election</option>
+                                </select>
+                            </div>
+                            
+                            <div id="resultsContainer">
+                                <p>Select an election to view results</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Users Tab -->
+                        <div class="tab-panel" id="users">
+                            <div class="admin-actions">
+                                <h3>Registered Users</h3>
+                            </div>
+                            
+                            <table class="election-list" id="usersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Registration Date</th>
+                                        <th>Role</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Users will be listed here dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+                <div class="error-message" id="loginError">Invalid email or password</div>
+                <div class="form-footer">
+                    Don't have an account? <a href="#" id="switchToRegister">Register here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Register</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Register</button>
+                <div class="success-message" id="registerSuccess">Registration successful! You can now login.</div>
+                <div class="error-message" id="registerError">Email already registered</div>
+                <div class="form-footer">
+                    Already have an account? <a href="#" id="switchToLogin">Login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Election Modal -->
+    <div class="modal" id="createElectionModal">
+        <div class="modal-content" style="width: 600px; max-width: 90%;">
+            <div class="modal-header">
+                <h2>Create New Election</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="createElectionForm">
+                <div class="form-group">
+                    <label for="electionTitle">Election Title</label>
+                    <input type="text" id="electionTitle" required placeholder="e.g., City Council Election 2025">
+                </div>
+                <div class="form-group">
+                    <label for="electionDescription">Description</label>
+                    <textarea id="electionDescription" rows="3" required placeholder="Describe the purpose of this election"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="electionType">Election Type</label>
+                    <select id="electionType" required>
+                        <option value="candidate">Candidate Election</option>
+                        <option value="referendum">Referendum (Yes/No)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" required>
+                </div>
+                
+                <!-- Candidate Options (for candidate elections) -->
+                <div id="candidateOptions">
+                    <label>Candidates</label>
+                    <div class="candidates-container" id="candidatesContainer">
+                        <div class="candidate-input">
+                            <input type="text" name="candidates[]" placeholder="Candidate name" required>
+                            <button type="button" class="remove-option">×</button>
+                        </div>
+                        <div class="candidate-input">
+                            <input type="text" name="candidates[]" placeholder="Candidate name" required>
+                            <button type="button" class="remove-option">×</button>
+                        </div>
+                    </div>
+                    <button type="button" class="add-option-btn" id="addCandidateBtn">+ Add Another Candidate</button>
+                </div>
+                
+                <!-- Referendum Options (for referendums) -->
+                <div id="referendumOptions" style="display: none;">
+                    <div class="form-group">
+                        <label for="yesOption">Yes Option Label</label>
+                        <input type="text" id="yesOption" placeholder="e.g., Yes - Support the proposal">
+                    </div>
+                    <div class="form-group">
+                        <label for="noOption">No Option Label</label>
+                        <input type="text" id="noOption" placeholder="e.g., No - Oppose the proposal">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">Create Election</button>
+                <div class="success-message" id="createElectionSuccess">Election created successfully!</div>
+                <div class="error-message" id="createElectionError">Error creating election</div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
